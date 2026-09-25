@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TorqueWorks Auto | Auto Repair & Service</title>
+
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --card: #14171c;
+      --card-light: #1b1f25;
+      --text: #f5f5f5;
+      --muted: #a7adb7;
+      --accent: #ff4d2e;
+      --accent-dark: #d9361e;
+      --border: #292e36;
+      --max-width: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: auto;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 13, 16, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .navbar {
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      border-radius: 9px;
+      font-size: 1.25rem;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #ddd;
+      font-size: 0.95rem;
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .nav-button {
+      padding: 10px 18px;
+      background: var(--accent);
+      border-radius: 7px;
+      color: white !important;
+      font-weight: bold;
+    }
+
+    .nav-button:hover {
+      background: var(--accent-dark);
+    }
+
+    .menu-btn {
+      display: none;
+      border: none;
+      background: none;
+      color: white;
+      font-size: 1.7rem;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 75px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(7,9,12,0.98) 0%, rgba(7,9,12,0.88) 45%, rgba(7,9,12,0.55) 100%),
+        radial-gradient(circle at 80% 40%, rgba(255,77,46,0.18), transparent 35%),
+        #0b0d10;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -150px;
+      top: 20%;
+      width: 500px;
+      height: 500px;
+      border: 80px solid rgba(255,77,46,0.05);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,77,46,0.5);
+      background: rgba(255,77,46,0.08);
+      color: #ff765e;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 23px;
+      border-radius: 7px;
+      font-weight: 800;
+      transition: 0.25s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: white;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ================= STATS ================= */
+
+    .stats {
+      background: #101318;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat {
+      padding: 25px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--accent);
+    }
+
+    .stat small {
+      color: var(--muted);
+    }
+
+    /* ================= SECTIONS ================= */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header .mini {
+      color: var(--accent);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      margin-top: 8px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: 12px auto 0;
+    }
+
+    /* ================= SERVICES ================= */
+
+    .services {
+      background: #0e1115;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 30px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255,77,46,0.5);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+
+    .service-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,77,46,0.1);
+      color: var(--accent);
+      border-radius: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .garage-image {
+      min-height: 430px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,77,46,0.15), transparent),
+        repeating-linear-gradient(
+          135deg,
+          #15191f 0px,
+          #15191f 20px,
+          #101318 20px,
+          #101318 40px
+        );
+    }
+
+    .garage-image::before {
+      content: "⚙";
+      position: absolute;
+      font-size: 15rem;
+      color: rgba(255,255,255,0.035);
+      right: -30px;
+      bottom: -70px;
+    }
+
+    .garage-label {
+      position: absolute;
+      left: 30px;
+      bottom: 30px;
+      background: rgba(0,0,0,0.8);
+      padding: 18px 22px;
+      border-left: 4px solid var(--accent);
+      border-radius: 5px;
+    }
+
+    .about-text h2 {
+      font-size: 3rem;
+      line-height: 1;
+      margin: 10px 0 20px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 25px;
+    }
+
+    .check-list li {
+      margin-bottom: 12px;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    /* ================= PRICING ================= */
+
+    .pricing {
+      background: #0e1115;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .popular {
+      position: absolute;
+      top: -13px;
+      right: 20px;
+      background: var(--accent);
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: bold;
+      border-radius: 20px;
+    }
+
+    .price-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin: 15px 0;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: normal;
+    }
+
+    .price-card ul {
+      list-style: none;
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .price-card li {
+      padding: 7px 0;
+    }
+
+    .price-card li::before {
+      content: "✓ ";
+      color: var(--accent);
+    }
+
+    /* ================= REVIEWS ================= */
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .stars {
+      color: #ffb52e;
+      margin-bottom: 15px;
+    }
+
+    .review p {
+      color: #c7cbd1;
+      margin-bottom: 20px;
+    }
+
+    .review strong {
+      display: block;
+    }
+
+    .review small {
+      color: var(--muted);
+    }
+
+    /* ================= BOOKING ================= */
+
+    .booking {
+      background: #0e1115;
+    }
+
+    .booking-box {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .booking-info {
+      padding: 45px;
+      background:
+        linear-gradient(rgba(255,77,46,0.13), rgba(255,77,46,0.02)),
+        #14171c;
+    }
+
+    .booking-info h2 {
+      font-size: 2.5rem;
+      line-height: 1;
+      margin: 10px 0 20px;
+    }
+
+    .booking-info p {
+      color: var(--muted);
+    }
+
+    .contact-info {
+      margin-top: 30px;
+    }
+
+    .contact-item {
+      margin: 18px 0;
+    }
+
+    .contact-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .booking-form {
+      padding: 45px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #0e1115;
+      border: 1px solid var(--border);
+      color: white;
+      padding: 12px 13px;
+      border-radius: 7px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      padding: 35px 0;
+      background: #080a0d;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      transition: 0.2s;
+    }
+
+    .socials a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ================= TOAST ================= */
+
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #1d2229;
+      border: 1px solid var(--accent);
+      padding: 15px 20px;
+      border-radius: 8px;
+      transform: translateY(150px);
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 2000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 850px) {
+      nav {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background: #0b0d10;
+        display: none;
+        flex-direction: column;
+        padding: 25px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat:nth-child(2) {
+        border-right: none;
+      }
+
+      .service-grid,
+      .price-grid,
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid,
+      .booking-box {
+        grid-template-columns: 1fr;
+      }
+
+      .garage-image {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      section {
+        padding: 70px 0;
+      }
+
+      .hero h1 {
+        font-size: 3.2rem;
+        letter-spacing: -2px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .booking-info,
+      .booking-form {
+        padding: 28px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <header>
+    <div class="container navbar">
+      <a href="#" class="logo">
+        <div class="logo-icon">🔧</div>
+        Torque<span>Works</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn">☰</button>
+
+      <nav id="nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#booking" class="nav-button">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+
+          <div class="badge">Trusted Auto Repair Shop</div>
+
+          <h1>
+            KEEP YOUR<br />
+            <span>ENGINE</span><br />
+            RUNNING.
+          </h1>
+
+          <p>
+            Professional automotive repair and maintenance from experienced
+            technicians who treat your vehicle like their own.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#booking" class="btn btn-primary">
+              Book an Appointment
+            </a>
+
+            <a href="#services" class="btn btn-outline">
+              Explore Services
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats">
+      <div class="container stats-grid">
+
+        <div class="stat">
+          <strong>15+</strong>
+          <small>Years Experience</small>
+        </div>
+
+        <div class="stat">
+          <strong>8K+</strong>
+          <small>Cars Serviced</small>
+        </div>
+
+        <div class="stat">
+          <strong>4.9/5</strong>
+          <small>Customer Rating</small>
+        </div>
+
+        <div class="stat">
+          <strong>12</strong>
+          <small>Certified Technicians</small>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+
+    <section class="services" id="services">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="mini">What We Do</div>
+          <h2>Our Services</h2>
+          <p>
+            From routine maintenance to complex repairs, we've got your vehicle covered.
+          </p>
+        </div>
+
+        <div class="service-grid">
+
+          <div class="service-card">
+            <div class="service-icon">🛢️</div>
+            <h3>Oil & Filter Change</h3>
+            <p>
+              Keep your engine running smoothly with regular oil and filter service.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🛞</div>
+            <h3>Tire Service</h3>
+            <p>
+              Tire rotations, balancing, inspections and replacement services.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🛑</div>
+            <h3>Brake Repair</h3>
+            <p>
+              Brake inspections, pad replacement, rotors and complete brake repairs.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">⚙️</div>
+            <h3>Engine Diagnostics</h3>
+            <p>
+              Advanced diagnostics to find the source of warning lights and engine problems.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">❄️</div>
+            <h3>AC & Heating</h3>
+            <p>
+              Stay comfortable with professional heating and air-conditioning service.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🔋</div>
+            <h3>Battery & Electrical</h3>
+            <p>
+              Battery testing, replacement and electrical system diagnostics.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+      <div class="container about-grid">
+
+        <div class="garage-image">
+          <div class="garage-label">
+            <strong>TORQUEWORKS GARAGE</strong><br />
+            <small>Built for drivers. Trusted by drivers.</small>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <div class="mini">Why TorqueWorks?</div>
+
+          <h2>WE FIX IT RIGHT.</h2>
+
+          <p>
+            At TorqueWorks Auto, we believe car repair should be simple,
+            transparent and reliable.
+          </p>
+
+          <p>
+            Our technicians use modern diagnostic equipment and quality parts
+            to get you safely back on the road.
+          </p>
+
+          <ul class="check-list">
+            <li>Certified technicians</li>
+            <li>Clear, upfront estimates</li>
+            <li>Quality replacement parts</li>
+            <li>12-month service warranty</li>
+            <li>Friendly customer service</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= PRICING ================= -->
+
+    <section class="pricing" id="pricing">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="mini">Popular Services</div>
+          <h2>Simple Pricing</h2>
+          <p>
+            Starting prices for some of our most popular services.
+          </p>
+        </div>
+
+        <div class="price-grid">
+
+          <div class="price-card">
+            <h3>Essential Oil Change</h3>
+            <div class="price">$59 <span>starting</span></div>
+
+            <ul>
+              <li>Engine oil</li>
+              <li>Oil filter</li>
+              <li>Basic inspection</li>
+              <li>Fluid check</li>
+            </ul>
+
+            <a href="#booking" class="btn btn-outline">Book Service</a>
+          </div>
+
+          <div class="price-card featured">
+            <div class="popular">POPULAR</div>
+
+            <h3>Brake Service</h3>
+            <div class="price">$149 <span>starting</span></div>
+
+            <ul>
+              <li>Brake inspection</li>
+              <li>Brake pad service</li>
+              <li>Rotor inspection</li>
+              <li>Safety check</li>
+            </ul>
+
+            <a href="#booking" class="btn btn-primary">Book Service</a>
+          </div>
+
+          <div class="price-card">
+            <h3>Diagnostic Check</h3>
+            <div class="price">$89 <span>starting</span></div>
+
+            <ul>
+              <li>Computer scan</li>
+              <li>Warning light check</li>
+              <li>Diagnostic report</li>
+              <li>Repair estimate</li>
+            </ul>
+
+            <a href="#booking" class="btn btn-outline">Book Service</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REVIEWS ================= -->
+
+    <section id="reviews">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="mini">Customer Reviews</div>
+          <h2>What Drivers Say</h2>
+        </div>
+
+        <div class="review-grid">
+
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+              "Great service and very honest. They explained exactly what was
+              wrong with my car before doing the repair."
+            </p>
+            <strong>Michael R.</strong>
+            <small>Local Customer</small>
+          </div>
+
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+              "I booked an oil change and was back on the road quickly.
+              The staff was friendly and professional."
+            </p>
+            <strong>Sarah T.</strong>
+            <small>Local Customer</small>
+          </div>
+
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+              "Finally found a mechanic I can trust. Fair pricing and great
+              communication throughout the repair."
+            </p>
+            <strong>Daniel K.</strong>
+            <small>Local Customer</small>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BOOKING ================= -->
+
+    <section class="booking" id="booking">
+      <div class="container">
+
+        <div class="booking-box">
+
+          <div class="booking-info">
+            <div class="mini">Get Started</div>
+
+            <h2>BOOK YOUR SERVICE.</h2>
+
+            <p>
+              Tell us what your vehicle needs and we'll get back to you
+              to confirm your appointment.
+            </p>
+
+            <div class="contact-info">
+
+              <div class="contact-item">
+                <span>Phone</span>
+                (604) 555-0147
+              </div>
+
+              <div class="contact-item">
+                <span>Email</span>
+                hello@torqueworksauto.com
+              </div>
+
+              <div class="contact-item">
+                <span>Hours</span>
+                Mon–Sat · 8:00 AM–6:00 PM
+              </div>
+
+            </div>
+          </div>
+
+          <div class="booking-form">
+
+            <form id="bookingForm">
+
+              <div class="form-grid">
+
+                <div class="field">
+                  <label for="name">Full Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="John Smith"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="(604) 555-0000"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="john@email.com"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="service">Service</label>
+
+                  <select id="service" required>
+                    <option value="">Choose a service</option>
+                    <option>Oil & Filter Change</option>
+                    <option>Brake Repair</option>
+                    <option>Tire Service</option>
+                    <option>Engine Diagnostics</option>
+                    <option>AC & Heating</option>
+                    <option>Battery & Electrical</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="date">Preferred Date</label>
+                  <input type="date" id="date" required />
+                </div>
+
+                <div class="field">
+                  <label for="time">Preferred Time</label>
+
+                  <select id="time" required>
+                    <option value="">Choose a time</option>
+                    <option>8:00 AM</option>
+                    <option>9:00 AM</option>
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>1:00 PM</option>
+                    <option>2:00 PM</option>
+                    <option>3:00 PM</option>
+                    <option>4:00 PM</option>
+                    <option>5:00 PM</option>
+                  </select>
+                </div>
+
+                <div class="field full">
+                  <label for="message">What's wrong with your vehicle?</label>
+
+                  <textarea
+                    id="message"
+                    placeholder="Tell us about the problem..."
+                  ></textarea>
+                </div>
+
+              </div>
+
+              <button class="btn btn-primary submit-btn" type="submit">
+                Request Appointment
+              </button>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+    <div class="container footer-inner">
+
+      <p>
+        © 2026 TorqueWorks Auto. All rights reserved.
+      </p>
+
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="TikTok">TK</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    Appointment request submitted!
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+    // Mobile navigation
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.getElementById("nav");
+
+    menuBtn.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("active");
+      });
+    });
+
+    // Set minimum booking date to today
+    const dateInput = document.getElementById("date");
+
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+    // Booking form
+    const form = document.getElementById("bookingForm");
+    const toast = document.getElementById("toast");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const service = document.getElementById("service").value;
+
+      if (!name || !service) {
+        return;
+      }
+
+      toast.textContent =
+        `Thanks, ${name}! Your ${service} appointment request was received.`;
+
+      toast.classList.add("show");
+
+      form.reset();
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 4500);
+    });
+
+    // Simple reveal animation
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document
+      .querySelectorAll(".service-card, .price-card, .review, .about-grid")
+      .forEach(element => {
+        element.style.opacity = "0";
+        element.style.transform = "translateY(25px)";
+        element.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(element);
+      });
+  </script>
+
+</body>
+</html>
